@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vedic Astrology Report - Birth Chart Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .birth-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .info-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-card strong {
+            color: #667eea;
+            display: block;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        section {
+            padding: 30px 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .section-header h2 {
+            font-size: 1.8em;
+            color: #333;
+        }
+
+        .section-badge {
+            background: #667eea;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .card {
+            background: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .card h4 {
+            color: #764ba2;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .card ul, .card ol {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .card li {
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+
+        .card p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        table tr:hover {
+            background: #f0f0f0;
+        }
+
+        .accordion {
+            margin-top: 20px;
+        }
+
+        .accordion-item {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            user-select: none;
+            transition: background 0.3s;
+        }
+
+        .accordion-header:hover {
+            background: #764ba2;
+        }
+
+        .accordion-toggle {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .accordion-toggle::after {
+            content: '▼';
+            font-size: 0.8em;
+            transition: transform 0.3s;
+        }
+
+        .accordion-item.active .accordion-toggle::after {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: #f8f9fa;
+            padding: 0 15px;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 2000px;
+            padding: 15px;
+        }
+
+        .accordion-content h4 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .accordion-content h5 {
+            margin-top: 15px;
+            margin-bottom: 8px;
+            color: #764ba2;
+        }
+
+        strong {
+            color: #667eea;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .section-badge {
+                margin-top: 10px;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            table th, table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Vedic Astrology Birth Chart Analysis</h1>
+            <p>Complete Life Prediction & Guidance Report</p>
+        </header>
+
+        <div class="birth-info">
+            <div class="info-card">
+                <strong>Birth Date</strong>
+                <span>December 28, 1999 (Tuesday)</span>
+            </div>
+            <div class="info-card">
+                <strong>Birth Time</strong>
+                <span>09:30 AM</span>
+            </div>
+            <div class="info-card">
+                <strong>Birth Place</strong>
+                <span>Ranchi, Jharkhand, India</span>
+            </div>
+            <div class="info-card">
+                <strong>Coordinates</strong>
+                <span>23°22'N, 85°20'E</span>
+            </div>
+            <div class="info-card">
+                <strong>Age</strong>
+                <span>26 years old (as of May 2026)</span>
+            </div>
+            <div class="info-card">
+                <strong>Lagna (Ascendant)</strong>
+                <span>Sagittarius 9°31'</span>
+            </div>
+        </div>
+
+        <!-- Career & Finance Section -->
+        <section id="career">
+            <div class="section-header">
+                <h2>💼 Career, Success & Financial Analysis</h2>
+                <span class="section-badge">PROFESSIONAL PROFILE</span>
+            </div>
+
+            <div class="card">
+                <h3>Planetary Influences on Career</h3>
+                <ul>
+                    <li><strong>Sagittarius Lagna:</strong> Natural entrepreneur, teacher, counselor. Career involves wisdom-sharing, guidance, or leadership roles.</li>
+                    <li><strong>Venus Exalted in 10th (Career House):</strong> Your career brings public recognition and social advancement. People naturally like you. Career choices lead to fame/respect.</li>
+                    <li><strong>Sun in 9th (Success House):</strong> Strong authority potential. Likely to lead, manage, or hold positions of responsibility. Recognition comes through integrity.</li>
+                    <li><strong>Saturn Debilitated in 10th:</strong> Early career struggles (20s-early 30s), but improves significantly after 35. Saturn's retrograde effect reverses around age 40.</li>
+                    <li><strong>Mercury Retrograde in 7th:</strong> Communication-related careers delayed initially. Success comes through writing, teaching, or one-on-one communication rather than large public presentations (initially).</li>
+                    <li><strong>Mars Retrograde:</strong> Hesitation in taking action/asserting in career. Low initial motivation. Must consciously push self into opportunities.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Career Timeline & Predictions</h3>
+                <table>
+                    <tr>
+                        <th>Age/Year</th>
+                        <th>Period Phase</th>
+                        <th>Career Status</th>
+                        <th>Guidance</th>
+                    </tr>
+                    <tr>
+                        <td>20-23</td>
+                        <td>Late Venus Mahadasha</td>
+                        <td>MODERATE - Learning phase, building skills</td>
+                        <td>Invest in education, develop expertise. Network with influential people (Venus attracts connections). Don't expect major success yet.</td>
+                    </tr>
+                    <tr>
+                        <td>23-26 (CURRENT)</td>
+                        <td>Early Sun Mahadasha (2022-2028)</td>
+                        <td>TURNING POINT - Visibility increases, opportunities emerge</td>
+                        <td>This is CRITICAL phase. Projects started now determine next 30 years. Push yourself into leadership roles. Visibility increases - use it wisely. First promotions/recognition likely.</td>
+                    </tr>
+                    <tr>
+                        <td>26-30</td>
+                        <td>Peak Sun Mahadasha + Moon begins (2028)</td>
+                        <td>GOOD TO EXCELLENT - Major success window opens</td>
+                        <td>Promotions accelerate. Income increases significantly. Ashtakavarga support (35 bindus) = universe helping. Opportunities come - grab them. Could start own venture successfully.</td>
+                    </tr>
+                    <tr>
+                        <td>30-35</td>
+                        <td>Moon Mahadasha (2028-2038)</td>
+                        <td>GOOD - Consolidation & expansion phase</td>
+                        <td>Career solidifies. Likely in stable, well-paying position or own business. Moon brings emotional satisfaction to work. Could mentor others. Leadership becomes natural.</td>
+                    </tr>
+                    <tr>
+                        <td>35-45</td>
+                        <td>Mars Mahadasha begins (2038)</td>
+                        <td>CHALLENGING INITIALLY, then EXCELLENT - Requires discipline</td>
+                        <td>Mars retrograde makes early 40s tricky - impulsiveness, conflicts possible. BUT: Saturn's retrograde reverses around 40 = wisdom emerges. After 40, tremendous power. Becomes recognized authority figure.</td>
+                    </tr>
+                    <tr>
+                        <td>45-63</td>
+                        <td>Rahu Mahadasha (2045-2062)</td>
+                        <td>PEAK SUCCESS - Authority, fame, wealth possible</td>
+                        <td>18-year period of maximum worldly success. Could become CEO, prominent expert, public figure. Must stay ethically grounded (Rahu can inflate ego). Spiritual practice essential during this phase.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>Ideal Career Paths</h3>
+                <ul>
+                    <li><strong>Teaching/Education:</strong> Natural fit. Sagittarius + Jupiter 9th = born teacher. Could teach philosophy, spirituality, business, history, or technical subjects.</li>
+                    <li><strong>Leadership/Management:</strong> Venus exalted in 10th = people skills. Sun in 9th = authority. Could excel as manager, director, CEO, entrepreneur.</li>
+                    <li><strong>Counseling/Guidance:</strong> Mercury 7th (communication) + Jupiter 9th (wisdom) = counselor, therapist, life coach, mentor.</li>
+                    <li><strong>Writing/Communication:</strong> Mercury in 7th suggests writing, journalism, content creation. Initially slower (retrograde) but eventually very successful in written word.</li>
+                    <li><strong>Business/Entrepreneurship:</strong> Sagittarius + Jupiter suggest business ownership. Venus exalted = financial success. Saturn suggests long-term stability. Could build lasting business empire.</li>
+                    <li><strong>Public Service/Politics:</strong> Venus exalted + Sun in 9th = public appeal. Could succeed in government, NGO leadership, social reform roles.</li>
+                    <li><strong>Spiritual/Philosophical Work:</strong> Jupiter 9th + Ketu 7th = profound spiritual depth. Could become guru, spiritual teacher, author of spiritual texts.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Financial Outlook</h3>
+                <ul>
+                    <li><strong>Overall:</strong> EXCELLENT - Venus exalted in 10th = strong wealth potential. Jupiter in 9th = financial luck and expansion.</li>
+                    <li><strong>Age 20-25:</strong> Limited financial resources. Student phase or entry-level job. Don't expect high income yet.</li>
+                    <li><strong>Age 25-30:</strong> Income begins to grow. Salary increases, possibly multiple income streams. Could reach comfortable middle-class by 30.</li>
+                    <li><strong>Age 30-40:</strong> Significant wealth accumulation. Real estate, investments, business ventures likely successful. Could become upper-middle class or wealthy.</li>
+                    <li><strong>Age 40-60:</strong> Peak earning years. Substantial wealth possible. Investments compound. Could achieve millionaire status if managed wisely.</li>
+                    <li><strong>Age 60+:</strong> Wealth maintained/grows. Focus shifts from earning to legacy/giving. Charitable giving increases (Saturn influence).</li>
+                    <li><strong>Caution:</strong> Saturn initially (age 20-35) = financial stress. Don't over-spend or over-commit. Build emergency fund. After 35, financial stress reduces significantly.</li>
+                    <li><strong>Investments:</strong> Conservative approach in 20s. From 30s onward, can take calculated risks. Real estate, stocks, mutual funds all favorable.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Marriage & Relationships Section -->
+        <section id="marriage">
+            <div class="section-header">
+                <h2>💑 Marriage, Love & Relationships</h2>
+                <span class="section-badge">RELATIONSHIP FORECAST</span>
+            </div>
+
+            <div class="card">
+                <h3>Marriage Timing & Potential</h3>
+                <table>
+                    <tr>
+                        <th>Age</th>
+                        <th>Period</th>
+                        <th>Marriage Viability</th>
+                        <th>Astrological Insight</th>
+                    </tr>
+                    <tr>
+                        <td>18-22</td>
+                        <td>Too Early</td>
+                        <td>NOT RECOMMENDED - Low marriage support</td>
+                        <td>Saturn retrograde on 7th (marriage) suggests delays. Better to focus on education/career</td>
+                    </tr>
+                    <tr>
+                        <td>22-26</td>
+                        <td>Venus Mahadasha (2002-2022 ended, but influence continues)</td>
+                        <td>MODERATE - Relationship awareness grows</td>
+                        <td>Possible meetings/relationships, but marriage still premature. Saturn suggests marriage after 26-27.</td>
+                    </tr>
+                    <tr>
+                        <td>26-28 (CURRENT PHASE)</td>
+                        <td>Sun Mahadasha (2022-2028) - peak visibility</td>
+                        <td>MODERATE-TO-GOOD - Visibility for marriage increases</td>
+                        <td>Sun brings personal magnetism and confidence. Could meet spouse, but may not marry immediately. More likely to form serious relationships that lead to marriage 2027-2028.</td>
+                    </tr>
+                    <tr>
+                        <td>28-30</td>
+                        <td>Moon Mahadasha begins (2028)</td>
+                        <td>HIGH - Moon is 10th Lord, relates to family/home</td>
+                        <td>Best marriage window. Emotional integration into family life. If serious relationship formed 26-28, marriage likely 28-30. Ashtakavarga 7th (35 bindus) supports this.</td>
+                    </tr>
+                    <tr>
+                        <td>30-35</td>
+                        <td>Moon Mahadasha continues</td>
+                        <td>STILL GOOD - If not married, can still occur</td>
+                        <td>Family expansion phase. Second marriage (rare) or deepening of existing marriage. If still single by 32-33, may need to actively seek partnerships.</td>
+                    </tr>
+                    <tr>
+                        <td>35+</td>
+                        <td>Mars Mahadasha begins (age 35+)</td>
+                        <td>LOWER - Mars retrograde, less focus on new relationships</td>
+                        <td>If married by 35, relationship solidifies. If single, Mars retrograde makes new relationships difficult until age 45+.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>Marriage Strengths & Challenges</h3>
+
+                <h4>STRENGTHS:</h4>
+                <ul>
+                    <li>Venus exalted in 10th = spouse well-received by society, marriage adds to your social standing</li>
+                    <li>Ashtakavarga 7th = 35 bindus (MAXIMUM support) = Universe strongly supports this marriage</li>
+                    <li>Moon exalted = good family harmony, emotional stability in marriage</li>
+                    <li>Jupiter in 9th = spiritual foundation to marriage; both partners can grow spiritually together</li>
+                    <li>Mercury in 7th = eventually develops deep communication and intellectual bond</li>
+                    <li>Saturn in 10th (marriage house) = marriage becomes stronger with time; 'till death do us part' mentality</li>
+                </ul>
+
+                <h4>CHALLENGES:</h4>
+                <ul>
+                    <li>Saturn retrograde on 7th = initial communication gaps, misunderstandings early in marriage. Takes 2-3 years to establish true understanding.</li>
+                    <li>Mercury retrograde in 7th = slowness in expressing feelings; partner may feel 'distant' emotionally early on, even if you care deeply</li>
+                    <li>Ketu in 7th = detachment from marriage outcomes; sometimes difficulty committing 100% emotionally (though committed legally)</li>
+                    <li>Mars retrograde = low physical passion initially; may need to consciously cultivate romantic intimacy</li>
+                    <li>7th Lord Saturn debilitated = initial marriage struggles financially or status-wise, but improves after 40</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Remedial Measures for Marriage</h3>
+                <ul>
+                    <li><strong>For Saturn retrograde delays:</strong>
+                        <ul>
+                            <li>Practice patience; don't rush into marriage before 26-27</li>
+                            <li>Offer water on Saturdays to Saturn; wear blue/black on Saturdays</li>
+                            <li>Mantra: 'Om Shanicharaya Namah' (108 times on Saturday)</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>For Mercury retrograde communication issues:</strong>
+                        <ul>
+                            <li>Consciously practice expressing feelings; don't assume partner knows your emotions</li>
+                            <li>Wear emerald or green stone (Mercury stone) if Mercury is weak</li>
+                            <li>Mantra: 'Om Budhaya Namah' (108 times on Wednesday)</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>For Ketu detachment (spiritual approach):</strong>
+                        <ul>
+                            <li>Understand marriage as spiritual partnership, not emotional possession</li>
+                            <li>Meditation practice helps integrate Ketu's spiritual detachment with healthy emotional commitment</li>
+                            <li>Mantra: 'Om Ketave Namah' (focus on spiritual evolution together)</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>General Marriage Support:</strong>
+                        <ul>
+                            <li>Worship Venus (Devi/Lakshmi) - strengthens marital harmony</li>
+                            <li>Wear diamond or white sapphire (Venus stones) if finances allow</li>
+                            <li>Jupiter's influence is inherently supportive - no special remedies needed</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Health & Psychology Section -->
+        <section id="health">
+            <div class="section-header">
+                <h2>🏥 Health & Psychological Profile</h2>
+                <span class="section-badge">WELLBEING ANALYSIS</span>
+            </div>
+
+            <div class="card">
+                <h3>Physical Health Indicators</h3>
+
+                <h4>Constitution & Immunity</h4>
+                <ul>
+                    <li><strong>Jupiter in 9th (health house from Lagna):</strong> Strong immunity. Recovery from illness is faster than average. Rarely suffers serious long-term diseases. Jupiter's benefic nature protects physical body.</li>
+                    
+                    <li><strong>Moon exalted (mind = health in Ayurveda):</strong> Clear mind = strong health foundation. Emotional stability = physical stability. No major psychosomatic diseases unless mental stress accumulates unchecked.</li>
+
+                    <li><strong>Mars retrograde (physical vitality):</strong> CAUTION: Reduced physical energy. Tend toward sedentary lifestyle. Low motivation for exercise. Result: weight gain, reduced muscle tone if not consciously addressed. Needs disciplined fitness routine.</li>
+
+                    <li><strong>Saturn debilitated (initially weak bones/joints):</strong> Early health: Possible calcium deficiency, joint issues, arthritis tendency. However, Saturn rules longevity - with proper diet/exercise, longevity is excellent. Bones strengthen after 40.</li>
+                </ul>
+
+                <h4>Specific Health Areas Needing Attention</h4>
+                <ul>
+                    <li><strong>Cardiovascular:</strong> Generally good (Jupiter protective), but Mars retrograde + sedentary tendency could lead to circulatory sluggishness. Regular aerobic exercise essential.</li>
+                    
+                    <li><strong>Digestive:</strong> Jupiter rules digestion - generally good absorption. However, sedentary lifestyle and mental stress can cause constipation, gas, bloating. Stress-management important.</li>
+
+                    <li><strong>Nervous System:</strong> Mercury retrograde indicates sensitive nervous system. Prone to anxiety, overthinking, insomnia (especially during stressful periods). Meditation, breathing exercises (pranayama) highly beneficial.</li>
+
+                    <li><strong>Bone & Joint Health:</strong> Saturn debilitated = calcium supplementation important. Vitamin D from sunlight essential. Yoga recommended from early 20s.</li>
+
+                    <li><strong>Sleep Patterns:</strong> Moon exalted = good sleep quality when stress is low. However, Mercury retrograde + Saturn + Rahu in 1st can cause sleep disruption during challenging periods. Establish consistent sleep schedule.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Psychological & Emotional Profile</h3>
+
+                <h4>Core Personality Traits</h4>
+                <ul>
+                    <li><strong>Idealistic vs. Realistic:</strong> Sagittarius Lagna + Jupiter in 9th = naturally idealistic. Believes in higher purpose, justice, truth. However, Saturn debilitated provides ground = learns pragmatism through life experience. Internal tension between 'what should be' and 'what is' drives personal growth.</li>
+
+                    <li><strong>Confidence & Self-Doubt:</strong> Mars retrograde = initial self-doubt, hesitation to assert self. Says 'yes' when should say 'no'. BUT: Sagittarius Lagna + Jupiter = underlying confidence. As mature, learns to balance assertiveness with diplomacy. Becomes quite confident by 40.</li>
+
+                    <li><strong>Introversion vs. Extroversion:</strong> 4 retrograde planets = significant introversion. Prefers deep one-on-one conversations over large group parties. Likes observing before acting. NOT natural 'spotlight seeker'. However, Venus exalted in 10th forces into public role - learns to be socially comfortable while maintaining private inner world.</li>
+
+                    <li><strong>Emotional Stability:</strong> Moon exalted in Leo = naturally stable. Fixed fire sign means emotions are not easily shaken. HOWEVER: Rahu in 1st + 4 retrogrades can create periods of anxiety/obsession. Usually temporary - returns to baseline stability quickly.</li>
+                </ul>
+
+                <h4>Mental Health Considerations</h4>
+                <ul>
+                    <li><strong>Anxiety Tendency:</strong> Mercury retrograde in 7th + Rahu in 1st = slight anxiety predisposition. Often overthinks, worries about future. Manifests as: insomnia, digestive issues during stressful periods, racing thoughts. REMEDIES: Meditation, pranayama, journaling, limiting news/social media consumption.</li>
+
+                    <li><strong>Perfectionism & Self-Criticism:</strong> Saturn retrograde + Mercury retrograde = tendency to be hard on self. Sets high standards, blames self for mistakes more than necessary. Needs to practice self-compassion.</li>
+
+                    <li><strong>Relationship with Authority:</strong> Saturn in 10th = complex relationship with authority figures. As young person: may resist authority, feel constrained. As mature adult: eventually becomes the authority figure - usually a fair, wise leader. Transformation happens around 35-40.</li>
+
+                    <li><strong>Escapism Tendencies:</strong> Jupiter in Pisces + Saturn debilitated = may resort to escapism under stress: excess sleep, alcohol, fantasy, procrastination. WARNING: Ketu's presence can amplify spiritual bypass. Self-awareness essential.</li>
+
+                    <li><strong>Spiritual Inclination as Mental Health Support:</strong> POSITIVE: Strong Jupiter in 9th + Ketu in 7th = natural access to meditation, spirituality, contemplation. Regular spiritual practice is exceptionally helpful for mental health.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Recommended Health Practices</h3>
+                <ul>
+                    <li><strong>Yoga & Stretching:</strong> ESSENTIAL - especially for Mars retrograde and Saturn (bone health). Practice 4-5x/week. Focus on: forward bends (calm nervous system), twists (digestive), standing poses (grounding), and bone-strengthening poses.</li>
+
+                    <li><strong>Meditation & Pranayama:</strong> CRITICAL - for Mercury retrograde (anxiety, overthinking), Saturn (stress management), and Rahu (obsessive thoughts). Daily practice, minimum 20 minutes.</li>
+
+                    <li><strong>Diet & Nutrition:</strong>
+                        <ul>
+                            <li>Calcium-rich: Milk, yogurt, leafy greens (Saturn bone health)</li>
+                            <li>Digestive foods: Ginger, turmeric, fennel, cumin (Jupiter digestion)</li>
+                            <li>Omega-3s: Fish, flax, walnuts (Mercury nervous system)</li>
+                            <li>Avoid: Excess caffeine (worsens anxiety), alcohol (escapism risk), processed foods</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>Sleep Hygiene:</strong> Maintain consistent sleep schedule. Avoid screens 1 hour before bed. Bedroom should be cool, dark, quiet. Herbal teas: chamomile, ashwagandha.</li>
+
+                    <li><strong>Regular Check-ups:</strong> Saturn suggests regular preventive health checks. Annual blood work, bone density tests (after 35), cholesterol screening.</li>
+
+                    <li><strong>Seasonal Adjustments:</strong> Saturn = sensitive to weather changes. Maintain warm clothing in winter (bone health), stay hydrated in summer (prevents constipation).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Spirituality Section -->
+        <section id="spirituality">
+            <div class="section-header">
+                <h2>🧘 Spiritual Evolution & Moksha</h2>
+                <span class="section-badge">SOUL MISSION</span>
+            </div>
+
+            <div class="card">
+                <h3>Spiritual Indicators in Chart</h3>
+                <ul>
+                    <li><strong>Jupiter in 9th (Highest Dharma House):</strong> This is THE most spiritual placement. Genuinely aligned with dharma. Natural inclination to understand life's higher purpose. Gravitates toward spiritual teachings, gurus, sacred places.</li>
+
+                    <li><strong>Ketu in 7th (Spiritual Detachment):</strong> Ketu is moksha indicator - represents liberation. In 7th (partnerships), suggests spiritual growth THROUGH relationships rather than renunciation OF relationships. Spouses/partners serve as spiritual mirrors.</li>
+
+                    <li><strong>Moon Exalted (Devotion & Bhakti):</strong> Moon in Leo (divine fire) suggests natural devotion, bhakti yoga resonates deeply. Can pour heart into devotional practices, singing, prayer without cynicism. Emotional approach to spirituality.</li>
+
+                    <li><strong>Mercury in Aquarius (Cosmic/Humanitarian Consciousness):</strong> Mercury in Aquarius = intellectual approach to spirituality. Can integrate scientific understanding with spiritual truth. Philosophy, vedanta, metaphysics deeply interesting.</li>
+
+                    <li><strong>Sun in 9th (Self-Realization Focus):</strong> Sun represents core self (atma). In 9th house (spirituality), indicates lifetime focus on understanding the Self. Meditation on Self, contemplation of consciousness.</li>
+
+                    <li><strong>4 Retrograde Planets (Internal Spiritual Seeking):</strong> Retrograde = turned inward. 4 retrograde planets = extremely introspective, contemplative nature. Natural yogis/meditators. This is the soul's natural tendency to turn inward toward Source.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Soul Mission & Karmic Purpose</h3>
+
+                <h4>What is Your Life Purpose?</h4>
+                <p>The core mission is SPIRITUAL WISDOM TRANSMISSION. This soul has incarnated to:</p>
+
+                <ol>
+                    <li><strong>INTEGRATE MATERIAL SUCCESS WITH SPIRITUAL TRUTH (Sagittarius + Saturn + Venus exalted combination):</strong>
+                        <ul>
+                            <li>Prove that one CAN be successful in worldly life while maintaining spiritual integrity</li>
+                            <li>Show that dharma and prosperity are not opposites but complementary</li>
+                            <li>Saturn early struggles teach humility and wisdom; later success teaches responsibility</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>HEAL ANCESTRAL PATTERNS (Ketu on Magha Nakshatra - Lagna):</strong>
+                        <ul>
+                            <li>Family lineage carries karma that needs releasing</li>
+                            <li>This incarnation breaks negative family cycles, establishes healthier patterns for descendants</li>
+                            <li>Teaching/mentoring future generations with wisdom earned from struggles</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>TRANSMIT SPIRITUAL KNOWLEDGE (Jupiter 9th + Sun 9th):</strong>
+                        <ul>
+                            <li>Teaching is not career choice but sacred duty (dharma)</li>
+                            <li>Can guide others on spiritual path through combination of: wisdom (Jupiter), authority (Sun), charm (Venus), discipline (Saturn)</li>
+                            <li>Eventually becomes recognized guru/teacher/spiritual leader</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>DEVELOP SPIRITUAL DETACHMENT WITHOUT RENUNCIATION (Ketu 7th in retrograde):</strong>
+                        <ul>
+                            <li>Evolve beyond needing external validation for success</li>
+                            <li>Maintain relationships, engage with worldly life, but inner consciousness remains free</li>
+                            <li>Demonstrate that one doesn't need to escape world to attain freedom</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h3>Spiritual Practices Recommended</h3>
+                <ul>
+                    <li><strong>MEDITATION (Primary Practice):</strong>
+                        <ul>
+                            <li>Vipassana (insight meditation) - Mercury retrograde loves deep analysis</li>
+                            <li>Advaita Self-Inquiry (Atma Vichara) - 'Who am I?' contemplation - aligns with Sun 9th</li>
+                            <li>Mantra meditation - repetition of chosen mantra, especially 'Om' or 'Aham Brahmasmi' (I am Brahman)</li>
+                            <li>Daily practice: minimum 30 minutes, ideally 1 hour</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>BHAKTI/DEVOTION (Secondary Practice):</strong>
+                        <ul>
+                            <li>Chanting - kirtan, bhajans (resonates with Moon exalted in Leo)</li>
+                            <li>Deity worship - choose: Hanuman (devotion + courage), Devi (universal mother), Krishna (love + wisdom)</li>
+                            <li>Service (Karma Yoga) - volunteer work, teaching, helping others</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>STUDY (Jnana Path - Intellectual Spirituality):</strong>
+                        <ul>
+                            <li>Vedantic texts: Upanishads, Brahma Sutras, Bhagavad Gita</li>
+                            <li>Modern spiritual philosophy: Ramakrishna, Vivekananda, Osho, J. Krishnamurti</li>
+                            <li>Science + Spirituality: Quantum physics, consciousness studies (Mercury in Aquarius appreciates this)</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>GURU/TEACHER CONNECTION:</strong>
+                        <ul>
+                            <li>Jupiter in 9th indicates natural connection to guru principle</li>
+                            <li>Seek authentic teacher; rely more on inner guru (Atman)</li>
+                            <li>Will eventually become guru/teacher for others - accept this dharma gracefully</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>PILGRIMAGE/SACRED SITES:</strong>
+                        <ul>
+                            <li>9th house = pilgrimage. Visit sacred places: Varanasi, Himalayas, Rishikesh, temples</li>
+                            <li>Each pilgrimage adds spiritual energy, removes karmic blockages</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Moksha Potential & Liberation</h3>
+                <p>Based on chart indicators:</p>
+                <ul>
+                    <li>VERY HIGH moksha potential. Ketu in 7th + Jupiter in 9th + Sun in 9th + Moon exalted + 4 retrogrades = soul in advanced spiritual stage.</li>
+                    
+                    <li>Unlikely to need many more lives to complete spiritual evolution IF proper effort applied in THIS life.</li>
+                    
+                    <li>Saturn's maturity (after 40) combined with Jupiter wisdom suggests possible enlightenment experiences in 50s-60s.</li>
+                    
+                    <li>Path is householder + spiritual (not forced renunciation). Live full life (marriage, career, family) while maintaining inner freedom.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Timeline & Dasha Analysis -->
+        <section id="timeline">
+            <div class="section-header">
+                <h2>📅 Life Timeline & Dasha Analysis</h2>
+                <span class="section-badge">PREDICTIVE CYCLES</span>
+            </div>
+
+            <div class="card">
+                <h3>Vimshottari Dasha Timeline</h3>
+                <table>
+                    <tr>
+                        <th>Period</th>
+                        <th>Age</th>
+                        <th>Mahadasha</th>
+                        <th>Key Characteristics</th>
+                    </tr>
+                    <tr>
+                        <td>1999-2002</td>
+                        <td>0-3</td>
+                        <td>Ketu (7 yrs total)</td>
+                        <td>Infancy, spiritual foundation laid</td>
+                    </tr>
+                    <tr>
+                        <td>2002-2022</td>
+                        <td>3-23</td>
+                        <td>Venus (20 yrs)</td>
+                        <td>Education, creativity, social charm develops</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2022-2028</strong></td>
+                        <td><strong>23-29</strong></td>
+                        <td><strong>Sun (6 yrs) - CURRENT</strong></td>
+                        <td>CRITICAL CAREER PHASE. Personal magnetism, visibility, authority beginning. Major life choices made now shape 30 years.</td>
+                    </tr>
+                    <tr>
+                        <td>2028-2038</td>
+                        <td>29-39</td>
+                        <td>Moon (10 yrs)</td>
+                        <td>Family expansion, emotional maturity, intuitive development, marriage likely, children possible</td>
+                    </tr>
+                    <tr>
+                        <td>2038-2045</td>
+                        <td>39-46</td>
+                        <td>Mars (7 yrs)</td>
+                        <td>Energy surge but Mars retrograde = challenges. Must avoid impulsive actions. By 40, Saturn retrograde effect reverses = wisdom-based action possible</td>
+                    </tr>
+                    <tr>
+                        <td>2045-2062</td>
+                        <td>46-63</td>
+                        <td>Rahu (18 yrs)</td>
+                        <td>Peak authority, worldly success, possible fame, but need spiritual grounding to avoid ego inflation</td>
+                    </tr>
+                    <tr>
+                        <td>2062-2081</td>
+                        <td>63-82</td>
+                        <td>Jupiter (16 yrs)</td>
+                        <td>Wisdom flourishes, guru/teacher phase, spiritual authority, respected elder, eventual enlightenment possible</td>
+                    </tr>
+                    <tr>
+                        <td>2081-2100</td>
+                        <td>82-101</td>
+                        <td>Saturn (19 yrs)</td>
+                        <td>Detachment, preparation for final transition, life review, completion of karmic cycles</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>Current Antardasha Timing</h3>
+                <p>As of May 28, 2026 (current date in this report):</p>
+                <ul>
+                    <li>Mahadasha: SUN (21/1/22 - 21/1/28)</li>
+                    <li>Current Antardasha: MERCURY (22/10/25 - 28/8/26)</li>
+                    <li>Mercury Antardasha under Sun Mahadasha:</li>
+                    <ul>
+                        <li>Sun brings visibility, Mercury adds communication/intellectual clarity</li>
+                        <li>Good period for: writing projects, public speaking, intellectual work, teaching</li>
+                        <li>Challenge: Mercury retrograde nature may cause communication misunderstandings, overthinking</li>
+                        <li>Remedy: Articulate clearly, put thoughts in writing, don't assume people understand</li>
+                    </ul>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Next 5 Years Critical Phases</h3>
+                <table>
+                    <tr>
+                        <th>Phase</th>
+                        <th>Period</th>
+                        <th>Antardasha</th>
+                        <th>What to Focus On</th>
+                    </tr>
+                    <tr>
+                        <td><strong>CURRENT</strong></td>
+                        <td>May 2026 - Aug 2026</td>
+                        <td>Sun-Mercury</td>
+                        <td>Communication projects, expressing ideas, clarity of thought</td>
+                    </tr>
+                    <tr>
+                        <td>PHASE 2</td>
+                        <td>Aug 2026 - Jan 2027</td>
+                        <td>Sun-Ketu</td>
+                        <td>Spiritual practice deepens, detachment develops, past karmas release</td>
+                    </tr>
+                    <tr>
+                        <td>PHASE 3</td>
+                        <td>Jan 2027 - Aug 2027</td>
+                        <td>Sun-Venus</td>
+                        <td>Relationships, marriage possibilities, financial gains, public recognition peaks</td>
+                    </tr>
+                    <tr>
+                        <td>PHASE 4</td>
+                        <td>Aug 2027 - Jan 2028</td>
+                        <td>Sun-Sun</td>
+                        <td>Self-realization period, identity solidifies, personal power consolidates</td>
+                    </tr>
+                    <tr>
+                        <td>PHASE 5</td>
+                        <td>Jan 2028 onwards</td>
+                        <td>Moon Mahadasha begins</td>
+                        <td>Transition to family/emotional phase, marriage likely, personality shifts toward nurturing</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- Remedial Measures -->
+        <section id="remedies">
+            <div class="section-header">
+                <h2>🔮 Remedial Measures & Recommendations</h2>
+                <span class="section-badge">ALIGNMENT PRACTICES</span>
+            </div>
+
+            <div class="card">
+                <h3>Overview: Remedies in Vedic Astrology</h3>
+                <p>Vedic astrology recognizes that karma is not rigid - it can be influenced through conscious action. Remedies (upaya) are practices that harmonize personal energy with planetary influences, reducing stress and increasing benefits. Remedies work best when combined with spiritual practice, conscious behavior, and life adjustments.</p>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>1. PLANETARY WORSHIP & MANTRAS</span>
+                        <span class="accordion-toggle"></span>
+                    </div>
+                    <div class="accordion-content">
+                        <h4>For Mars (Retrograde Weakness - Assertiveness Issue)</h4>
+                        <ul>
+                            <li><strong>Deity:</strong> Hanuman (Mars embodied as devotion + courage)</li>
+                            <li><strong>Mantra:</strong> 'Om Hanumate Namah' or 'Om Mangalaya Namah'</li>
+                            <li><strong>Practice:</strong> Chant 108 times on Tuesdays (Mars day). Do this for 40 days minimum to see effect.</li>
+                            <li><strong>Additional:</strong> Visit Hanuman temple on Tuesdays, offer flowers/sweets, pray for courage and assertiveness</li>
+                            <li><strong>Expected Outcome:</strong> Increased confidence, ability to say 'no' diplomatically, warrior spirit awakens (in healthy way)</li>
+                        </ul>
+
+                        <h4>For Saturn (Debilitation & Retrograde - Career Delays)</h4>
+                        <ul>
+                            <li><strong>Deity:</strong> Shani (Saturn deity), or Durga (for overcoming obstacles)</li>
+                            <li><strong>Mantra:</strong> 'Om Shanicharaya Namah' or 'Om Hrim Dhanamukthaya Namah'</li>
+                            <li><strong>Practice:</strong> Chant 108 times on Saturdays. Offer oil lamps to Shani or pour mustard oil on Saturday evening at temple</li>
+                            <li><strong>Behavior Correction:</strong> Practice extreme punctuality and discipline - Saturn respects these qualities. Complete tasks on time. Be responsible and accountable.</li>
+                            <li><strong>Expected Outcome:</strong> Obstacles reduce, delays shorten, career progression accelerates (especially after 30). Wisdom and maturity increase.</li>
+                        </ul>
+
+                        <h4>For Mercury (Retrograde - Communication & Anxiety)</h4>
+                        <ul>
+                            <li><strong>Deity:</strong> Saraswati (Goddess of Communication & Learning)</li>
+                            <li><strong>Mantra:</strong> 'Om Budhaya Namah' or 'Om Aim Saraswathyai Namah'</li>
+                            <li><strong>Practice:</strong> Chant 108 times on Wednesdays (Mercury day). Study spiritual texts on Wednesday - strengthens Mercury</li>
+                            <li><strong>Gemstone Option:</strong> Wear Emerald (1-2 carats, lab-certified) on right hand middle finger after proper rituals</li>
+                            <li><strong>Behavioral Remedy:</strong> Speak slowly and clearly; write down important communications; don't assume people understand immediately</li>
+                            <li><strong>Expected Outcome:</strong> Communication becomes clearer, anxiety reduces, intellectual capacity recognized and utilized</li>
+                        </ul>
+
+                        <h4>For Jupiter (Maintain Strength)</h4>
+                        <ul>
+                            <li><strong>Deity:</strong> Brihaspati (Jupiter deity), Dhanvantari (healing), or Veda Vyasa (wisdom)</li>
+                            <li><strong>Mantra:</strong> 'Om Brihaspataye Namah'</li>
+                            <li><strong>Practice:</strong> Chant on Thursdays (Jupiter day). Read Vedantic texts on Thursdays</li>
+                            <li><strong>Behavioral:</strong> Practice generosity - donate food, money, or time to those in need. This strengthens Jupiter's benefic nature</li>
+                            <li><strong>Expected Outcome:</strong> Jupiter's protection maintained; luck continues; spiritual growth accelerates; wisdom deepens</li>
+                        </ul>
+
+                        <h4>For Venus (Maintain Charm & Success)</h4>
+                        <ul>
+                            <li><strong>Deity:</strong> Lakshmi (prosperity), Parvati (grace), or Kamakshi (desire fulfillment)</li>
+                            <li><strong>Mantra:</strong> 'Om Shrim Mahalakshmyai Namah' or 'Om Shukraya Namah'</li>
+                            <li><strong>Practice:</strong> Chant on Fridays (Venus day). Worship Lakshmi or Durga on Fridays</li>
+                            <li><strong>Gemstone:</strong> Diamond or White Sapphire (if affordable; 1-2 carats) on right hand ring finger</li>
+                            <li><strong>Behavioral:</strong> Practice gratitude for beauty, relationships, and material blessings. Maintain aesthetic surroundings. Be gracious and charitable</li>
+                            <li><strong>Expected Outcome:</strong> Exalted Venus maintained; relationships flourish; financial success continues; public charm increases</li>
+                        </ul>
+
+                        <h4>For Rahu (Manage Obsessions & Desires)</h4>
+                        <ul>
+                            <li><strong>Deity:</strong> Durga (overcoming illusions), Kali (transformation)</li>
+                            <li><strong>Mantra:</strong> 'Om Rahu Chandaya Namah' or 'Om Hrim Dhukkha Nasanaya Namah'</li>
+                            <li><strong>Practice:</strong> Chant on Saturdays or during Rahu transition periods</li>
+                            <li><strong>Meditation:</strong> Practice discernment meditation - observe thoughts without identifying with them</li>
+                            <li><strong>Behavioral:</strong> Develop awareness of obsessive thoughts; redirect energy toward spiritual pursuits; practice non-attachment</li>
+                            <li><strong>Expected Outcome:</strong> Obsessive tendencies reduce; desires become more balanced; sudden opportunities manifest positively</li>
+                        </ul>
+
+                        <h4>For Ketu (Spiritual Growth & Release)</h4>
+                        <ul>
+                            <li><strong>Deity:</strong> Ganesha (removal of obstacles), Shiva (detachment), Devi Shakti</li>
+                            <li><strong>Mantra:</strong> 'Om Ketave Namah' or 'Om Namah Shivaya' (Shiva's mantra enhances Ketu's liberation principle)</li>
+                            <li><strong>Practice:</strong> Chant 108 times during new moon (Ketu day)</li>
+                            <li><strong>Meditation:</strong> Practice surrender meditation - 'thy will be done' - accept flow of life</li>
+                            <li><strong>Expected Outcome:</strong> Spiritual breakthroughs increase; obsessive patterns release; detachment from outcomes brings peace</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>2. CHARITABLE DONATIONS (Dana)</span>
+                        <span class="accordion-toggle"></span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Giving consciously to those in need is one of the most powerful remedies. It balances karma directly and attracts positive energy.</p>
+
+                        <h4>Donations by Planet:</h4>
+                        <table>
+                            <tr>
+                                <th>Planet</th>
+                                <th>What to Donate</th>
+                                <th>Day</th>
+                                <th>Beneficiary</th>
+                            </tr>
+                            <tr>
+                                <td>Mars</td>
+                                <td>Red objects, fruits (pomegranate, watermelon), red cloth</td>
+                                <td>Tuesday</td>
+                                <td>Young boys, soldiers, athletic programs</td>
+                            </tr>
+                            <tr>
+                                <td>Saturn</td>
+                                <td>Black objects, sesame seeds, iron tools, dark cloth</td>
+                                <td>Saturday</td>
+                                <td>Elderly people, disabled, servants</td>
+                            </tr>
+                            <tr>
+                                <td>Mercury</td>
+                                <td>Green objects, learning materials, books, pens</td>
+                                <td>Wednesday</td>
+                                <td>Students, teachers, intellectuals, poor children</td>
+                            </tr>
+                            <tr>
+                                <td>Jupiter</td>
+                                <td>Yellow objects, sugar, honey, gold, religious texts</td>
+                                <td>Thursday</td>
+                                <td>Priests, scholars, poor families, widows</td>
+                            </tr>
+                            <tr>
+                                <td>Venus</td>
+                                <td>White objects, diamonds, perfumes, clothes, flowers</td>
+                                <td>Friday</td>
+                                <td>Artists, women, orphans, care facilities</td>
+                            </tr>
+                            <tr>
+                                <td>Rahu</td>
+                                <td>Blue/smoky objects, animal feed, mustard oil</td>
+                                <td>Saturday or during Rahu transits</td>
+                                <td>Marginalized people, animals, lower castes</td>
+                            </tr>
+                            <tr>
+                                <td>Ketu</td>
+                                <td>Mixed colors, multi-grain, spiritual items</td>
+                                <td>New moon or during Ketu transits</td>
+                                <td>Spiritual seekers, monasteries, ashrams, animals</td>
+                            </tr>
+                        </table>
+
+                        <h4>Best Practice for Dana:</h4>
+                        <ul>
+                            <li>Give with purity of heart - NOT for recognition or reward</li>
+                            <li>Give on specific planet's day for maximum benefit</li>
+                            <li>Amount doesn't matter - small consistent gift better than large erratic gift</li>
+                            <li>Give directly to recipient if possible (vs. through intermediary)</li>
+                            <li>Make it a monthly/weekly practice - rhythm matters</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>3. GEMSTONES (Ratnas) - With Caution</span>
+                        <span class="accordion-toggle"></span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>IMPORTANT: Gemstones are powerful but must be chosen carefully. Wrong stone can cause harm. Always consult authentic astrologer before wearing.</p>
+
+                        <h4>Recommended Gemstones for This Chart:</h4>
+                        <table>
+                            <tr>
+                                <th>Planet</th>
+                                <th>Stone</th>
+                                <th>Carats</th>
+                                <th>Finger</th>
+                                <th>When to Wear</th>
+                            </tr>
+                            <tr>
+                                <td>Mercury</td>
+                                <td>Emerald (Panna) - GREEN</td>
+                                <td>1-3</td>
+                                <td>Middle (right hand)</td>
+                                <td>For communication, anxiety reduction. Wear after ritual on Wednesday</td>
+                            </tr>
+                            <tr>
+                                <td>Venus</td>
+                                <td>Diamond or White Sapphire - COLORLESS/WHITE</td>
+                                <td>1-2</td>
+                                <td>Ring (right hand)</td>
+                                <td>For maintaining exalted Venus power, charm, wealth. Expensive - optional. Wear after Friday ritual</td>
+                            </tr>
+                        </table>
+
+                        <h4>CAUTION: NOT Recommended (Could Make Things Worse):</h4>
+                        <ul>
+                            <li>Ruby (Mars stone) - Mars already retrograde; Ruby could worsen indecision</li>
+                            <li>Blue Sapphire (Saturn stone) - Saturn already debilitated; premature Sapphire wear could intensify Saturn's negative effects</li>
+                            <li>Wear Blue Sapphire only after age 40 when Saturn reverses its retrograde (or under strict astrologer guidance)</li>
+                        </ul>
+
+                        <h4>Proper Ritual for Wearing Gemstone:</h4>
+                        <ul>
+                            <li>Purchase stone from reputable jeweler; ensure certification (lab-tested for authenticity)</li>
+                            <li>On appropriate day (Wednesday for Emerald, Friday for Diamond), perform ritual:</li>
+                            <ul>
+                                <li>Wash stone in holy water or milk</li>
+                                <li>Chant planet's mantra 108 times while holding stone</li>
+                                <li>Wear in specified finger/hand</li>
+                                <li>Wear for minimum 3 months to see effect; continue as long as beneficial</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>4. BEHAVIORAL & LIFESTYLE CORRECTIONS</span>
+                        <span class="accordion-toggle"></span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>The most important remedies are behavioral - how you act, speak, think, and behave reshapes your karma in real-time.</p>
+
+                        <h4>Key Behavioral Corrections:</h4>
+
+                        <h5>For Mars Retrograde (Assertiveness):</h5>
+                        <ul>
+                            <li>Practice saying 'No' clearly and diplomatically - essential for boundaries</li>
+                            <li>Take up physical activity/sports - swimming, martial arts (especially Aikido which combines softness with strength)</li>
+                            <li>Challenge yourself regularly - do things that scare you (public speaking, negotiations, leadership roles)</li>
+                            <li>Develop physical strength through exercise - Mars loves bodies that move, build, and act</li>
+                        </ul>
+
+                        <h5>For Saturn Debilitation (Patience & Discipline):</h5>
+                        <ul>
+                            <li>Establish rigid routine - wake early, sleep early, exercise at fixed time, eat at fixed time</li>
+                            <li>Practice extreme punctuality - be 10 minutes early for EVERY appointment</li>
+                            <li>Complete tasks BEFORE deadline - Saturn appreciates responsibility</li>
+                            <li>Develop long-term thinking - plan 5-10 years ahead (Saturn's perspective)</li>
+                            <li>Accept hardship as opportunity for growth - Saturn's lessons are earned, not given</li>
+                        </ul>
+
+                        <h5>For Mercury Retrograde (Communication & Mind):</h5>
+                        <ul>
+                            <li>Write everything down - emails, agreements, important conversations. This externalizes Mercury's internal processing</li>
+                            <li>Speak slowly and clearly - don't rush communication</li>
+                            <li>Ask clarification questions - don't assume you understand</li>
+                            <li>Limit news/social media/information overload - Mercury's mind can become overwhelmed</li>
+                            <li>Regular meditation to calm restless mind</li>
+                        </ul>
+
+                        <h5>For Rahu in 1st (Obsessions & Self-Image):</h5>
+                        <ul>
+                            <li>Practice mindfulness - observe thoughts without judgment</li>
+                            <li>Develop awareness of 'I am not my thoughts' - create distance from obsessive mind</li>
+                            <li>Avoid mirror-gazing/excessive self-analysis - Rahu in 1st can lead to body image obsession</li>
+                            <li>Focus outward (service, helping others) rather than inward (self-improvement obsession)</li>
+                        </ul>
+
+                        <h5>For Ketu in 7th (Relationships & Detachment):</h5>
+                        <ul>
+                            <li>Practice expressing love explicitly - Ketu's detachment can make partner feel 'not loved'</li>
+                            <li>Schedule quality time with loved ones - calendar it</li>
+                            <li>Learn to value emotional connection as equal to spiritual pursuit</li>
+                            <li>Understand that loving someone deeply while remaining internally free is the goal</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const isActive = item.classList.contains('active');
+            
+            // Close all accordion items
+            document.querySelectorAll('.accordion-item').forEach(i => {
+                i.classList.remove('active');
+            });
+            
+            // Open clicked item if it wasn't already open
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
